@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-    <h2>Your Project Quotations</h2>
-    <nav>
-        <ul>
-            <li><a href="{% url 'dashboard' %}">Request a Quote</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-        </ul>
-    </nav>
-    <ul>
-        {% for quote in quotes %}
-            <li>{{ quote.project_name }} - {{ quote.description }}</li>
-        {% empty %}
-            <li>No project quotations yet.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Dashboard</h1>
+<p>This is where you can manage your quotations and projects.</p>
+<a href="{% url 'home' %}">Logout</a>
+{% endblock %}

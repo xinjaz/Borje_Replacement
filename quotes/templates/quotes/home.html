@@ -1,10 +1,104 @@
+<!-- quotes/templates/quotes/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Smart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: url('https://images.unsplash.com/photo-1560447079-23892a8e300c') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            width: 100vw;  /* Full viewport width */
+            background-color: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
+            padding: 20px; /* Padding for inner spacing */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 600px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+
+        .testimonial {
+            margin-top: 40px;
+            font-style: italic;
+            color: #f0f0f0;
+            text-align: center;
+        }
+
+        .testimonial h3 {
+            margin-bottom: 10px;
+        }
+
+        .testimonial p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-$END$
+    <div class="container">
+        <h1>Build Smart</h1>
+        <h2>Your Trusted Partner in Construction</h2>
+        <p>We provide innovative solutions and plans tailored to your needs. Let's build your dream project together!</p>
+        <a href="{% url 'login' %}" class="button">Login</a>
+        <a href="{% url 'register' %}" class="button">Register</a>
+
+        <div class="testimonial">
+
+            <p>"Build Smart helped us realize our vision. Their team is professional and attentive!" - Sarah L.</p>
+            <p>"Fantastic experience! Highly recommend for all construction needs." - John D.</p>
+        </div>
+    </div>
 </body>
 </html>
