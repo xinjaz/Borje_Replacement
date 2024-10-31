@@ -1,0 +1,26 @@
+{% extends "quotes/base_generic.html" %}
+
+{% block title %}Add Material{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Add Material</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="unit">Unit:</label>
+            <input type="text" class="form-control" name="unit" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Material</button>
+        <a href="{% url 'project_materials' project_id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

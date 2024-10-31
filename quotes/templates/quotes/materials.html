@@ -1,0 +1,38 @@
+{% extends "quotes/base_generic.html" %}
+
+{% block title %}Materials{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Project Materials</h1>
+    <a href="{% url 'add_material' project.id %}" class="btn btn-primary mb-3">Add Material</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for material in materials %}
+            <tr>
+                <td>{{ material.name }}</td>
+                <td>{{ material.description }}</td>
+                <td>{{ material.unit }}</td>
+                <td>
+                    <a href="{% url 'edit_material' material.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_material' material.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No materials available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

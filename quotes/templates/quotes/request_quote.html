@@ -1,0 +1,17 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="area_size">Area Size (sq.m):</label>
+    <input type="text" name="area_size" required>
+
+    <h3>Project Elements</h3>
+    {% for element in elements %}
+        <input type="radio" name="project_elements" value="{{ element.id }}">{{ element.name }}<br>
+    {% endfor %}
+
+    <h3>Materials</h3>
+    {% for material in materials %}
+        <input type="radio" name="materials" value="{{ material.id }}">{{ material.name }}<br>
+    {% endfor %}
+
+    <button type="submit">Request Quote</button>
+</form>
