@@ -1,17 +1,195 @@
-<form method="post">
-    {% csrf_token %}
-    <label for="area_size">Area Size (sq.m):</label>
-    <input type="text" name="area_size" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Project Quotation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: url('https://images.unsplash.com/photo-1560447079-23892a8e300c') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
 
-    <h3>Project Elements</h3>
-    {% for element in elements %}
-        <input type="radio" name="project_elements" value="{{ element.id }}">{{ element.name }}<br>
-    {% endfor %}
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            width: 100vw;  /* Full viewport width */
+            background-color: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
+            padding: 20px; /* Padding for inner spacing */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            border-radius: 10px; /* Rounded corners */
+            max-width: 600px; /* Max width for the form */
+            margin: auto; /* Centering the container */
+        }
 
-    <h3>Materials</h3>
-    {% for material in materials %}
-        <input type="radio" name="materials" value="{{ material.id }}">{{ material.name }}<br>
-    {% endfor %}
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-    <button type="submit">Request Quote</button>
-</form>
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block; /* Block for better spacing */
+            margin-bottom: 10px; /* Margin for spacing */
+            font-size: 1.1em; /* Font size for labels */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="number"], input[type="radio"] {
+            margin-right: 10px; /* Space for radio buttons */
+        }
+
+        input[type="number"] {
+            padding: 10px; /* Padding for input */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            width: 100%; /* Full width */
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Spacing between groups */
+            text-align: left; /* Align text left */
+            max-width: 100%; /* Full width */
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+
+        .materials {
+            display: none; /* Initially hide all material groups */
+            margin-top: 10px; /* Spacing above material groups */
+        }
+    </style>
+    <script>
+        function showMaterials(element) {
+            const materialsSections = document.querySelectorAll('.materials');
+            materialsSections.forEach(section => section.style.display = 'none'); // Hide all materials
+            const selectedElement = element.value;
+
+            if (selectedElement) {
+                document.getElementById(selectedElement).style.display = 'block'; // Show selected material group
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Request a Project Quotation</h1>
+        <h2>Let Us Build Your Dream Together!</h2>
+            <form action="{% url 'submit_quotation' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="areaSize">Area Size (sq.m):</label>
+                <input type="number" id="areaSize" name="areaSize" required>
+            </div>
+
+            <fieldset class="form-group">
+                <legend>Project Elements:</legend>
+                <label>
+                    <input type="radio" name="projectElement" value="framing" onclick="showMaterials(this)" required>
+                    Framing
+                </label>
+                <label>
+                    <input type="radio" name="projectElement" value="windowDoor" onclick="showMaterials(this)" required>
+                    Window and Door Installation
+                </label>
+                <label>
+                    <input type="radio" name="projectElement" value="electrical" onclick="showMaterials(this)" required>
+                    Electrical
+                </label>
+                <label>
+                    <input type="radio" name="projectElement" value="plumbing" onclick="showMaterials(this)" required>
+                    Plumbing
+                </label>
+            </fieldset>
+
+            <div class="materials" id="framing">
+                <strong>For Framing (Select one):</strong>
+                <label>
+                    <input type="radio" name="material" value="Exterior Wall Framing" required>
+                    Exterior Wall Framing
+                </label>
+                <label>
+                    <input type="radio" name="material" value="Roof Framing" required>
+                    Roof Framing
+                </label>
+                <label>
+                    <input type="radio" name="material" value="Door Framing" required>
+                    Door Framing
+                </label>
+            </div>
+
+            <div class="materials" id="windowDoor">
+                <strong>For Window and Door Installation (Select one):</strong>
+                <label>
+                    <input type="radio" name="material" value="Barn Door" required>
+                    Barn Door
+                </label>
+                <label>
+                    <input type="radio" name="material" value="Sliding Door" required>
+                    Sliding Door
+                </label>
+            </div>
+
+            <div class="materials" id="electrical">
+                <strong>For Electrical (Select one):</strong>
+                <label>
+                    <input type="radio" name="material" value="Light Switches" required>
+                    Light Switches
+                </label>
+                <label>
+                    <input type="radio" name="material" value="Main Panel" required>
+                    Main Panel
+                </label>
+            </div>
+
+            <div class="materials" id="plumbing">
+                <strong>For Plumbing (Select one):</strong>
+                <label>
+                    <input type="radio" name="material" value="Shower Fixture" required>
+                    Shower Fixture
+                </label>
+                <label>
+                    <input type="radio" name="material" value="Toilet Installation" required>
+                    Toilet Installation
+                </label>
+            </div>
+
+            <button type="submit" class="button">Submit a Request</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -3,31 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Project Management{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Side Navigation</title>
+    <style>
+        /* Basic styling for the sidebar */
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 20px;
+            overflow-x: hidden;
+        }
+
+        .sidenav a {
+            padding: 15px 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            text-align: center;
+        }
+
+        .sidenav a:hover {
+            background-color: #575757;
+            color: #f1f1f1;
+        }
+
+        /* Add margin to content when sidebar is visible */
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Project Management</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                {% for project in projects %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'materials' %}">Materials</a></li>
 
-                {% endfor %}
+    <!-- Side navigation bar -->
+    <div class="sidenav">
+        <a href="{% url 'request_quote' %}">Request a Quote</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
 
-                <!-- Add more links as needed -->
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container">
+    <!-- Main content area -->
+    <div class="main-content">
         {% block content %}
+        <!-- Content from individual templates goes here -->
         {% endblock %}
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

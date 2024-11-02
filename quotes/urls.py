@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from . import views
-from .views import materials, add_material, edit_material, delete_material, request_quote
+from .views import materials, request_quote
 
 urlpatterns = [
     path('register/', views.register, name='register'),  # Route for user registration
@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),  # Route for user logout
     path('quotes/', views.dashboard, name='dashboard'),  # Route for dashboard
     path('project/<int:project_id>/materials/', materials, name='materials'),
-    path('project/<int:project_id>/materials/add/', add_material, name='add_material'),
-    path('materials/edit/<int:material_id>/', edit_material, name='edit_material'),
-    path('materials/delete/<int:material_id>/', delete_material, name='delete_material'),
+    path('request-quote/', views.request_quote, name='request_quote'),
+    path('submit-quotation/', views.submit_quotation, name='submit_quotation'),
+
 ]
